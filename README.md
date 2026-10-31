@@ -8,8 +8,9 @@
 
 ## 2. 배포 정보
 
-- GitHub Repository:
-- Vercel Deployment:
+- GitHub Repository:https://github.com/2026-2-OSS/assign09-c01-22500323.git
+- GitHub Repository(개인):https://github.com/22500323-cloud/2026OSS_assign09.git
+- Vercel Deployment:https://2026ossassign09-seven.vercel.app/
 - MockAPI Endpoint:https://6adea6e84e88f1bba4a53aec.mockapi.io/book
 
 ## 3. 서비스 설명
