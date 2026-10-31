@@ -7,9 +7,88 @@
     </head>
     <body>
         <h1>도서관리</h1>
-        <button id="loadBtn" type="button">도서목록 불러오기</button>
-        <p id="status">버튼 클릭하세요</p>
-        <ul id="bookList"></ul>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 40px auto;
+                padding: 0 20px;
+                color: #202938;
+            }
+
+            h1{
+                margin-bottom: 10px;
+            }
+
+            section {
+            margin: 25px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            }
+
+            input {
+                padding: 9px;
+                margin: 5px 3px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            button {
+                padding: 9px 15px;
+                margin: 5px 3px;
+                border: none;
+                border-radius: 5px;
+                background: #2459bd;
+                color: white;
+                cursor: pointer;
+            }
+
+            .delete-btn {
+                background: #d9534f;
+            }
+
+            #status {
+                color: #596579;
+            }
+
+            li {
+                padding: 12px 5px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            a {
+                color: #2459bd;
+            }
+
+
+        </style>
+        <p><a href="index.html">메인 페이지로 돌아가기</a></p>
+
+        <section>
+            <h2>도서검색</h2>
+            <input type="text" id="searchInput" placeholder="도서 제목 또는 저자 검색">
+            <button id="searchBtn" type="button">검색</button>
+        </section>
+
+        <section>
+            <h2>도서추가</h2>
+            <form id="bookForm">
+                <input type="text" id="title" placeholder="도서제목">
+                <input type="text" id="author" placeholder="저자">
+                <input type="text" id="genre" placeholder="장르">
+                <input type="number" id="price" placeholder="가격">
+                <input type="number" id="year" placeholder="출판연도">
+                <button type="submit">추가</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>도서목록</h2>
+            <button id="loadBtn" type="button">목록 새로고침</button>
+            <p id="status">도서 목록을 불러와주세요.</p>
+            <ul id="bookList"></ul>
+        </section>
         <script src="crud.js"></script>
     </body>
 </html>
