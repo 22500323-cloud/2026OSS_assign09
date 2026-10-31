@@ -5,6 +5,16 @@ const loadBtn = document.querySelector("#loadBtn");
 const status = document.querySelector("#status");
 const bookList = document.querySelector("#bookList");
 
+const bookForm = document.querySelector("#bookForm");
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const genreInput = document.querySelector("#genre");
+const priceInput = document.querySelector("#price");
+const yearInput = document.querySelector("#year");
+const submitBtn = bookForm.querySelector("button[type='submit']");
+
+let editingBookId = null;
+
 async function loadBooks() {
     loadBtn.disabled = true;
     status.textContent = "도서 데이터를 가져오는 중 ...";
@@ -21,7 +31,28 @@ async function loadBooks() {
 
         books.forEach(book => {
             const li = document.createElement("li");
-            li.textContent = `${book.title}/${book.author}/${book.genre}/${book.price}원/${book.year}년`;
+
+            const info = document.createElement("span");
+            info.textContent = `${book.title}/${book.author}/${book.genre}/${book.price}원/${book.year}년`;
+
+            const editBtn = document.createElement("button");
+            editBtn.textContent = "수정";
+
+            editBtn.addEventListener("click", () => {
+                editingBookId = book.id;
+
+                titleInput.value = book.title;
+                authorInput.value = book.author;
+                genreInput.value = book.genre;
+                priceInput.value = book.price;
+                yearInput.value = book.year;
+
+                submitBtn.textContent = "수정";
+                status.textContent = "도서 정보를 수정해 주세요.";
+            });
+
+            li.appendChild(info);
+            li.appendChild(editBtn);
             bookList.appendChild(li);
         });
 
@@ -35,16 +66,7 @@ async function loadBooks() {
     }
 }
 
-// 버튼 클릭 시 도서 목록 조회
 loadBtn.addEventListener("click", loadBooks);
-
-
-const bookForm = document.querySelector("#bookForm");
-const titleInput = document.querySelector("#title");
-const authorInput = document.querySelector("#author");
-const genreInput = document.querySelector("#genre");
-const priceInput = document.querySelector("#price");
-const yearInput = document.querySelector("#year");
 
 async function addBook(event) {
     event.preventDefault();
@@ -65,9 +87,17 @@ async function addBook(event) {
         return;
     }
 
+    const isEditing = editingBookId !== null;
+
+    const method = isEditing ? "PUT" : "POST";
+
+    const url = isEditing
+        ? `${API_URL}/${editingBookId}`
+        : API_URL;
+
     try {
-        const response = await fetch(API_URL, {
-            method: "POST",
+        const response = await fetch(url, {
+            method: method,
             headers: {
                 "Content-Type": "application/json"
             },
@@ -84,14 +114,21 @@ async function addBook(event) {
             throw new Error(`HTTP ${response.status}`);
         }
 
+        const message = isEditing
+            ? "도서가 성공적으로 수정되었습니다."
+            : "도서가 성공적으로 등록되었습니다.";
+
+        editingBookId = null;
         bookForm.reset();
+        submitBtn.textContent = "추가";
+
         await loadBooks();
-        status.textContent = "도서가 성공적으로 등록되었습니다.";
+
+        status.textContent = message;
+
     } catch (error) {
-        status.textContent = `등록 실패: ${error.message}`;
+        status.textContent = `저장 실패: ${error.message}`;
     }
 }
 
 bookForm.addEventListener("submit", addBook);
-
-
