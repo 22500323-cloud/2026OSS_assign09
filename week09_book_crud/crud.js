@@ -108,7 +108,8 @@ function searchBooks() {
     const keyword = searchInput.value.trim().toLowerCase();
 
     const filteredBooks = allBooks.filter(book =>
-        book.title.toLowerCase().includes(keyword)
+        book.title.toLowerCase().includes(keyword) ||
+        book.author.toLowerCase().includes(keyword)
     );
 
     displayBooks(filteredBooks);
