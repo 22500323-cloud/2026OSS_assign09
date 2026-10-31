@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <script>
+        const scores =[70,80,90];
+        scores.forEach(score=>{
+            console.log(score);
+        })
+        const updated=scores.map(score=>score+5);
+        console.log(updated);
+    </script>
+
+    <script>
+        const students=[
+            {id:1,name:"kim",score:85},
+            {id:2,name:"lee",score:92},
+            {id:3,name:"park",score:78}
+        ]
+
+        const name=[];
+        students.forEach(function(students){
+            names.push(students.name);
+        });
+        console.log(names);
+    </script> -->
+
+    <script>
+        const students=[
+            {id:1,name:"kim",score:85},
+            {id:2,name:"lee",score:92},
+            {id:3,name:"park",score:78},
+            {id:4,name:"choi",score:92}
+        ];
+
+        const result = students.filter(function(student){
+            return student.score>=90;
+        });
+        console.log(result);
+
+        const student =student.find(function(student){
+            return student.name==="lee";
+        });
+
+        const result = student.filter(function(student){
+            return student.id !==2;
+        });
+    </script>
+</body>
+</head>    
+<body>
+    
+</html>
