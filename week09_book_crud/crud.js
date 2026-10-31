@@ -135,8 +135,13 @@ async function addBook(event) {
     const price = Number(priceInput.value);
     const year = Number(yearInput.value);
 
-    if (!title || !author || !genre || !priceInput.value || !yearInput.value) {
-        status.textContent = "모든 항목을 입력해 주세요.";
+    if (!Number.isFinite(price) || price < 0 || !Number.isInteger(price)) {
+        status.textContent = "가격은 0 이상의 정수로 입력해 주세요.";
+        return;
+    }
+
+    if (!Number.isInteger(year) || year <= 0) {
+        status.textContent = "출판 연도는 양의 정수로 입력해 주세요.";
         return;
     }
 
